@@ -1,0 +1,446 @@
+A Taste of Ruby
+Me
+	Sam Stokes
+
+	me@samstokes.co.uk
+	@samstokes on Twitter
+What to expect
+	Whirlwind tour
+	Not a detailed introduction
+Language poll
+	Python
+	Javascript
+	Java
+	Objective C
+Overview
+	<IMAGE
+	<https://www.ruby-lang.org/images/header-ruby-logo@2x.png
+	What is Ruby?
+What is Ruby?
+	<IMAGE
+	<https://www.ruby-lang.org/images/header-ruby-logo@2x.png
+	interpreted
+What is Ruby?
+	<IMAGE
+	<https://www.ruby-lang.org/images/header-ruby-logo@2x.png
+	interpreted
+	dynamically typed
+What is Ruby?
+	<IMAGE
+	<https://www.ruby-lang.org/images/header-ruby-logo@2x.png
+	interpreted
+	dynamically typed
+	object oriented
+What is Ruby?
+	<IMAGE
+	<https://www.ruby-lang.org/images/header-ruby-logo@2x.png
+	interpreted
+	dynamically typed
+	object oriented
+	a real programming language!
+What is Ruby?
+	<IMAGE
+	<http://upload.wikimedia.org/wikipedia/commons/7/76/Yukihiro_Matsumoto.JPG
+	designed for "programmer happiness"
+What is Ruby?
+	<IMAGE
+	<http://upload.wikimedia.org/wikipedia/commons/7/76/Yukihiro_Matsumoto.JPG
+	designed for "programmer happiness"
+		MINASWAN
+Overview
+	<IMAGE
+	<ruby-logo-barred.png
+	>MARKDOWN
+	>What is Ruby *not*?
+	>-------------------
+What is Ruby not?
+	<IMAGE
+	<ruby-logo-barred.png
+	Fast
+What is Ruby not?
+	<IMAGE
+	<ruby-logo-barred.png
+	Fast
+		doesn't matter if you're I/O-bound
+		C bindings
+What is Ruby not?
+	<IMAGE
+	<ruby-logo-barred.png
+	Simple
+What is Ruby not?
+	<IMAGE
+	<http://upload.wikimedia.org/wikipedia/commons/7/76/Yukihiro_Matsumoto.JPG
+	Simple
+		"Natural, not simple"
+		TMTOWTDI
+What is Ruby not?
+	<IMAGE
+	<ruby-logo-barred.png
+	Concurrent
+What is Ruby not?
+	<IMAGE
+	<ruby-logo-barred.png
+	Concurrent
+		Green threads (until recently)
+		GIL
+		Multi-process deployments common
+What is Ruby not?
+	<IMAGE
+	<ruby-logo-barred.png
+	Concurrent
+		Green threads (until recently)
+		GIL
+		Multi-process deployments common
+	This is changing
+		EventMachine - reactor pattern
+		JRuby - real threads, no GIL
+Enough of that
+	>MARKDOWN
+	><img class="full" src="show-me-the-code.jpg" />
+Hello world
+Hello world
+	<rUbY
+	<puts "Hello world"
+Syntax
+	<RUBY
+	<# Comments
+	<
+	<# Variables:
+	<name = "Sam"       # strings
+	<country = 'UK'     # single quotes work too
+	<age  = 29
+	<dog  = nil         # I don't have a dog
+	<
+	<# Booleans:
+	<name == 'Sam'      # => true
+	<age > 30           # => false
+	<
+	<# Simple output:
+	<puts name
+Syntax - continued
+	<RUBY
+	<# Branching
+	<if age >= 21        # no parentheses!
+	<  puts "Whiskey, neat"
+	<else
+	<  puts "Orange juice"
+	<end
+Syntax - oddities
+	<RUBY
+	<# parentheses are optional for method calls
+	<name.size                   # => 3
+	<#name.size()                # => 3
+	<
+	<puts age                    # prints 29
+	<#puts(age)                  # prints 29
+	<
+	<#country.sub 'K', 'SA'      # => 'USA'
+	<country.sub('K', 'SA')      # => 'USA'
+	Convention
+		: use parentheses if 2 or more arguments
+Syntax - oddities
+	<RUBY
+	<# postfix conditionals
+	<puts "Have a beer" if age >= 21
+	<
+	<# method names can end with ? or !
+	<name.start_with?('S')       # => true
+	<dog_breeds.empty?           # => false
+	<dog_breeds.shuffle!         # modifies original array
+	<
+	<# String interpolation
+	<"Hello #{name}!"            # => 'Hello Sam!'
+	<# double quotes only
+	<'Hello #{name}!'            # => 'Hello #{name}!'
+Arrays
+	<RUBY
+	<# Arrays
+	<small_dogs = [
+	<  'Corgi',
+	<  'Poodle',
+	<  'Chihuahua',
+	<]
+	<
+	<small_dogs[1]         # => 'Poodle'
+	<small_dogs.size       # => 3
+Hashes
+	<RUBY
+	<# Hashes (a.k.a. dictionaries, maps)
+	<noises = {
+	<  'dog' => 'Woof',
+	<  'cat' => 'Meow',
+	<  'snake' => nil,
+	<}
+	<
+	<noises['dog']         # => 'Woof'
+Objects
+	Everything is an object
+	<RUBY
+	<small_dogs.size      # => 3
+	<small_dogs.empty?    # => false
+	<
+	<small_dogs.class     # => Array
+	<noises.class         # => Hash
+Objects
+	>MARKDOWN
+	>*Everything* is an object!
+	>--------------------------
+	<RUBY
+	<"Pulse".class        # => String
+	<"Pulse".size         # => 5
+	<
+	<42.class             # => Fixnum
+	<42.even?             # => true
+Objects
+	Classes are objects too
+	<RUBY
+	<name.class           # => String
+	<name.class.class     # => Class
+Objects
+	Classes are objects too
+	<RUBY
+	<name.class           # => String
+	<String.class         # => Class
+	<
+	<String.new("foo")    # => "foo"
+Objects
+	Classes are objects too
+	<RUBY
+	<klazz = name.class
+	<
+	<klazz.new("foo")     # => "foo"
+Objects
+	>MARKDOWN
+	>*Everything* is an object!
+	>--------------------------
+	<RUBY
+	<nil.class            # => NilClass
+	<
+	<true.class           # => TrueClass
+	<false.class          # => FalseClass
+	<
+	<# Why not:
+	<#   true.class # => Boolean
+Truthiness
+	>MARKDOWN
+	>> "We're not talking about truth, we're
+	>> talking about something that seems like
+	>> truth &ndash; the truth we want to exist"
+	><cite>&mdash; Stephen Colbert</cite>
+	<RUBY
+	<if noises[animal]
+	<  puts noises[animal]
+	<end
+	>MARKDOWN
+	>`false` and `nil` are falsy
+	>
+	>everything else is truthy
+Duck typing
+	<ruby
+	<class Person
+	<  def say_hello
+	<    puts "Nice weather we're having!"
+	<  end
+	<end
+	<
+	<class Dog
+	<  def say_hello
+	<    20.times { puts 'Woof!' }
+	<  end
+	<end
+	<
+	<beings = [Person.new, Dog.new]
+	<beings.each do |being|
+	<  being.say_hello
+	<end
+Duck typing
+	>MARKDOWN
+	>>"If it quacks like a duck..."
+	><cite>&mdash; anon.</cite>
+	<RUBY
+	<beings = [Person.new, Dog.new]
+	<beings.each do |being|
+	<  being.say_hello
+	<end
+Duck typing
+	>MARKDOWN
+	>>"If it quacks like a duck..."
+	><cite>&mdash; anon.</cite>
+	<RUBY
+	<beings = [Person.new, Dog.new]
+	<beings.each do |being|
+	<  being.say_hello
+	<end
+	>MARKDOWN
+	>No `Helloable` interface
+	>
+	>No `Being` superclass
+Duck typing
+	>MARKDOWN
+	>>"If it quacks like a duck..."
+	><cite>&mdash; anon.</cite>
+	<RUBY
+	<beings = [Person.new, Dog.new]
+	<beings.each do |being|
+	<  being.say_hello
+	<end
+	Never mind what it is...
+	How does it behave?
+Dynamic dispatch
+	<RUBY
+	<person.say_hello
+	<# Nice weather we're having!
+	<
+	<person.say_goodbye
+	<# NoMethodError: undefined method `say_goodbye'
+	<# for #<Person:0x007ff7b5bd40e8>
+Dynamic dispatch
+	<RUBY
+	<class Robot
+	<  def method_missing(method_name, *args)
+	<    case method_name
+	<    when /^say_(.*)/
+	<      puts $1.gsub('_', ' ').upcase
+	<    else
+	<      super
+	<    end
+	<  end
+	<end
+Dynamic dispatch
+	<RUBY
+	<bender = Robot.new
+	<
+	<bender.say_hello
+	<# HELLO
+	<
+	<bender.say_destroy_all_humans
+	<# DESTROY ALL HUMANS
+Metaprogramming
+	<RUBY
+	<class PoliteRobot
+	<  PLEASANTRIES = {
+	<    "hello"   => "Nice weather we're having!",
+	<    "goodbye" => "Jolly nice to see you.",
+	<  }
+	<  
+	<  PLEASANTRIES.each do |name, pleasantry|
+	<    define_method("say_#{name}") do
+	<      puts pleasantry
+	<    end
+	<  end
+	<end
+Metaprogramming
+	<RUBY
+	<c3po = PoliteRobot.new
+	<
+	<c3po.say_hello
+	<# Nice weather we're having!
+	<
+	<c3po.say_goodbye
+	<# Jolly nice to see you.
+	<
+	<c3po.say_destroy_all_humans
+	<# NoMethodError: undefined method `say_destroy_all_humans'
+	<# for #<PoliteRobot:0x007ff7bb0108f0>
+ActiveRecord
+	Goal: simplify mapping objects to database rows
+	<RUBY
+	<rows = sql("SELECT name, age FROM people WHERE id = 1")
+	<person_data = rows[0]
+	<
+	<person = Person.new(
+	<    person_data.get_field(0),
+	<    person_data.get_field(1))
+ActiveRecord
+	Goal: avoid duplicating schema in model classes
+	<SQL
+	<CREATE TABLE people (
+	<    name TEXT
+	<  , age  INT)
+	looks like
+	<ruby
+	<class Person
+	<  def initialize(name, age)
+	<    @name = name
+	<    @age = age
+	<  end
+	<  def name
+	<    @name
+	<  end
+	<  def age
+	<    @age
+	<  end
+	<end
+ActiveRecord
+	Solution: metaprogramming!
+	<ruby
+	<class ActiveRecord::Base                 # pseudocode
+	<  # runs when class is loaded
+	<  columns = parse(sql("DESCRIBE TABLE #{table_name}"))
+	<  
+	<  self.class.define_method('find') do |id|
+	<    rows = sql("SELECT #{columns.join(', ')} FROM #{table_name} WHERE id = #{id}")
+	<    data = rows[0]
+	<
+	<    self.attributes = {}
+	<    columns.each_with_index do |i, column|
+	<      self.attributes[column] = data[i]
+	<    end
+	<  end
+	<
+	<  columns.each do |column|
+	<    define_method(column) do
+	<      attributes[column]
+	<    end
+	<  end
+	<end
+ActiveRecord
+	<RUBY
+	<class Person < ActiveRecord::Base
+	<end
+	<
+	<person = Person.find 1
+	<
+	<person.name           # => Sam
+	<
+	<person.team = 'Pulse'
+	<person.save!
+Pry
+	<IMAGE
+	<pry-screenshot.png
+	REPL / debugger
+		on steroids
+	Explore your programs
+RubyMotion
+	<IMAGE
+	<http://www.rubymotion.com/images/write-screenshot.png
+	Write iOS apps in (a subset of) Ruby
+	Compiles to native code
+Sinatra - Minimalist web framework
+	<IMAGE
+	<http://www.sinatrarb.com/images/logo.png
+	install
+	<BASH
+	<gem install sinatra
+	code
+	<ruby
+	<# app.rb
+	<require 'sinatra'
+	<
+	<get '/' do
+	<  'Hello world!'
+	<end
+	run
+	<BASH
+	<ruby app.rb
+	Do try this at home!
+MAYBE
+	Monkeypatching
+		a.k.a. "duck punching"
+		<RUBY
+		<TODO
+	e.g. 3.days.ago
+	Blocks
+	DSL
+		Rake
+	Bundler?

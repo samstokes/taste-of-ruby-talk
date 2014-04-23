@@ -1,4 +1,4 @@
-NAME = ruby-training-1
+NAME = taste-of-ruby
 ARCHIVE_NAME = $(NAME)-$(shell date +%Y-%m-%d)
 SLIDES = $(NAME)-slides.html
 SLIDES_DIST = $(NAME)-slides-standalone.html
@@ -11,11 +11,11 @@ zip: $(ARCHIVE_NAME).zip
 dist: $(SLIDES_DIST) $(ASSETS)
 	mkdir -p dist
 	# download external references, e.g. slidy CSS and JS
-	sed -nE 's?.*(href|src)="(http://[^"]+\.(css|js))".*?\2?p' $< | xargs wget --directory-prefix dist
+	sed -nE 's#.*(href|src)="(https?://[^"]+\.(css|js|png))".*#\2#p' $< | sort -u | xargs wget --no-check-certificate --directory-prefix dist
 	#ls dist/*.gz | xargs --no-run-if-empty gunzip
 	if [ -n "$(ASSETS)" ]; then cp $(ASSETS) dist; fi
 	# modify external references to point to downloaded assets
-	sed -E 's?(href|src)="(http://[^"]+/([^"]+\.(css|js)))"?\1="\3"?; s?(href|src)="(.*)\.gz"?\1="\2"?' $< > dist/$<
+	sed -E 's#(href|src)="(https?://[^"]+/([^"]+\.(css|js|png)))"#\1="\3"#; s?(href|src)="(.*)\.gz"?\1="\2"?' $< > dist/$<
 	mv dist/$< dist/index.html
 $(ARCHIVE_NAME).zip: dist
 	cd $< && zip ../$@ *
