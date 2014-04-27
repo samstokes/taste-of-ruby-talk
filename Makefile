@@ -3,7 +3,7 @@ ARCHIVE_NAME = $(NAME)-$(shell date +%Y-%m-%d)
 SLIDES = $(NAME)-slides.html
 SLIDES_DIST = $(NAME)-slides-standalone.html
 SLIDES_STYLESHEET = $(wildcard slides.css)
-IMAGES = $(wildcard *.png)
+IMAGES = $(wildcard *.png *.jpg)
 ASSETS = $(IMAGES) $(SLIDES_STYLESHEET)
 
 all: $(SLIDES)
