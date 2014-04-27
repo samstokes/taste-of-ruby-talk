@@ -434,13 +434,3 @@ Sinatra - Minimalist web framework
 	<BASH
 	<ruby app.rb
 	Do try this at home!
-MAYBE
-	Monkeypatching
-		a.k.a. "duck punching"
-		<RUBY
-		<TODO
-	e.g. 3.days.ago
-	Blocks
-	DSL
-		Rake
-	Bundler?
